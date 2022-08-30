@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>singleview</title>
+
+    <style>
+        img {
+            max-width: 50%;
+        }
+
+        #singleArticle {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+        <button id="tilbageKnap">Tilbage</button>
+        <article id="singleArticle">
+            <img id="singleviewBillede" src="" alt="">
+            <h2></h2>
+            <p></p>
+            <p></p>
+        </article>
+ 
+
+        <script>
+
+
+        const urlParams = new URLSearchParams(window.location.search); 
+        let id = urlParams.get("id");
+        let person;
+
+        const endpoint = `https://persongalleri-5d3e.restdb.io/rest/persongalleri/${id}`;
+        const key = {
+        headers : {
+            "x-apikey" : "600fe9211346a1524ff12e31",
+        },
+    }    
+
+        async function hentData(){
+        const respons = await fetch(endpoint, key);
+        person = await respons.json();
+        visPerson(person);
+        }
+
+        
+        function visPerson(person){
+            const single = document.querySelector("#singleArticle");
+            single.querySelector("#singleviewBillede").src = "billeder/faces/" + person.billede;
+            single.querySelector("h2").textContent = person.fornavn + " " + person.efternavn;
+            single.querySelector("p").textContent = person.email;
+            single.querySelector("p+p").textContent = person.fødselsdag.slice(0,10);
+            console.log(single);
+        }
+        
+        document.querySelector("#tilbageKnap").addEventListener("click", tilbageLoopView);
+
+        function tilbageLoopView(){
+            location.href ="04-single view.html";
+    
+        }
+        
+        hentData();
+        </script>
+
+</body>
+</html>
