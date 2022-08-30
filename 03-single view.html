@@ -60,6 +60,12 @@
             width: 100%;
         }
 
+        #popupKnap {
+            position: fixed;
+            top: 93px;
+            left: 66rem;
+        }
+    
 
     </style>
     
@@ -90,6 +96,7 @@
 </section>
 
 <div id="popup">
+    <button id="popupKnap">X</button>
     <article id="popupArticle">
         <img id="popupBillede" src="" alt="">
         <h2></h2>
@@ -158,8 +165,9 @@
     this.classList.add("valgt");
 }
 
-function visPerson(personData){
 const popup = document.querySelector("#popup");
+
+function visPerson(personData){
 popup.style.display = "flex";
 popup.querySelector("h2").textContent = personData.fornavn + " " + personData.efternavn; 
 popup.querySelector("img").src = "/billeder/faces/" + personData.billede;
@@ -167,8 +175,12 @@ popup.querySelector("p").textContent = personData.email;
 popup.querySelector("p+p").textContent = personData.fødselsdag.slice(0,10);
 }
 
-document.querySelector("#popup").addEventListener("click", ()=>popup.style.display = "none");
+document.querySelector("#popupKnap").addEventListener("click", forsvindKnap);
 
+
+function forsvindKnap(){
+popup.style.display = "none"
+}
 
     </script>
 
