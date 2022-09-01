@@ -30,8 +30,8 @@
         <script>
 
 
-        const urlParams = new URLSearchParams(window.location.search); 
-        let id = urlParams.get("id");
+        const urlParams = new URLSearchParams(window.location.search); //tager navnet på urlen fra vinduet der er åbent og sætter det ind i en konstant
+        let id = urlParams.get("id"); //tager id'et fra vinduet og gemmer den i en variabel
         let person;
 
         const endpoint = `https://persongalleri-5d3e.restdb.io/rest/persongalleri/${id}`;
